@@ -8,8 +8,12 @@ public:
 	int width;
 	int height;
 	
-	
-
+	TigerUI() {
+		struct winsize ws;
+		ioctl(TIOCGWINSZ, 0, ws);
+		height = ws.ws_row;
+		width = ws.ws_col;
+	}
 };
 
 
