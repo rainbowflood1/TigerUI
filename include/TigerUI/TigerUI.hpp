@@ -2,6 +2,8 @@
 #define TIGERUI_HPP_INCLUDED
 
 #include <sys/ioctl.h>
+#include <string>
+
 
 class TigerUI {
 public:
