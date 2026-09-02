@@ -16,6 +16,9 @@ public:
 		ioctl(TIOCGWINSZ, 0, ws);
 		height = ws.ws_row;
 		width = ws.ws_col;
+		for (uint32_t i = 0; i < width*height; i++) {
+			screen_txt += " ";
+		}
 	}
 	void Draw() {
 		
