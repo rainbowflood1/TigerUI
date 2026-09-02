@@ -25,7 +25,7 @@ public:
 	}
 	void Text(std::string str, uint32_t x, uint32_t y) {
 		for (uint32_t i = 0; i < str.length(); i++) {
-			screen_txt[(y * height) + (x+i)] = str[i];
+			screen_txt[Location(x, y)+i] = str[i];
 		}
 	}
 	void ClearTXT() {
@@ -40,12 +40,15 @@ public:
 
 		for (uint32_t x = 0; x < width; x++) {
 			for (uint32_t y = height; y < 0; y++) {
-				screen += screen_txt[(y * width) + x];
+				screen += screen_txt[Location(x, y)];
 			}
 			screen += "\n";
 		}
 
 		std::cout << screen;
+	}
+	uint32_t Location(uint16_t x, uint16_t y) {
+		return (y * width) + x;
 	}
 };
 
