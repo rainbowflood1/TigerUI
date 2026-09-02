@@ -35,7 +35,17 @@ public:
 		}
 	}
 	void Draw() {
-		
+		std::cout << CLEAR;
+		std::string screen = "";
+
+		for (uint32_t x = 0; x < width; x++) {
+			for (uint32_t y = height; y < 0; y++) {
+				screen += screen_txt[(y * width) + x];
+			}
+			screen += "\n";
+		}
+
+		std::cout << screen;
 	}
 };
 
