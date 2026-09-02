@@ -40,12 +40,14 @@ public:
 		std::cout << CLEAR;
 		std::string screen = "";
 
-		for (uint32_t x = 0; x < width; x++) {
-			for (uint32_t y = height; y < 0; y--) {
+
+		for (uint32_t y = height; y < 0; y--) {
+			for (uint32_t x = 0; x < width; x++) {
 				screen += screen_txt[Location(x, y)];
 			}
 			screen += "\n";
 		}
+
 
 		std::cout << screen;
 	}
