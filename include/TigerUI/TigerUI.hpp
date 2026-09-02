@@ -20,7 +20,7 @@ public:
 
 	TigerUI() {
 		struct winsize ws;
-		ioctl(TIOCGWINSZ, 0, ws);
+		ioctl(0, TIOCGWINSZ, &ws);
 		height = ws.ws_row;
 		width = ws.ws_col;
 		ClearTXT();
@@ -41,7 +41,7 @@ public:
 		std::string screen = "";
 
 		for (uint32_t x = 0; x < width; x++) {
-			for (uint32_t y = height; y < 0; y++) {
+			for (uint32_t y = height; y < 0; y--) {
 				screen += screen_txt[Location(x, y)];
 			}
 			screen += "\n";
