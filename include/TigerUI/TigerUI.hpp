@@ -9,7 +9,7 @@ class TigerUI {
 public:
 	int width;
 	int height;
-	std::string screen = "";
+	std::string screen_txt = "";
 
 	TigerUI() {
 		struct winsize ws;
