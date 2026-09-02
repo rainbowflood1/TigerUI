@@ -5,7 +5,11 @@
 
 class TigerUI {
 public:
+	int width;
+	int height;
 	
+	
+
 };
 
 
