@@ -4,6 +4,7 @@
 #include <sys/ioctl.h>
 #include <cstdint>
 #include <string>
+#include <vector>
 
 #define CLEAR (std::string) "\e[2Jm"
 
@@ -13,6 +14,7 @@ public:
 	int width;
 	int height;
 	std::string screen_txt = "";
+	std::vector<uint32_t> screen_color;
 
 	TigerUI() {
 		struct winsize ws;
