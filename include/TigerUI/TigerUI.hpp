@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <string>
 
+#define CLEAR (std::string) "\e[2Jm"
 
 
 class TigerUI {
