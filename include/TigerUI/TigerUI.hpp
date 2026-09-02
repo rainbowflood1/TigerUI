@@ -28,6 +28,12 @@ public:
 			screen_txt[(y * height) + (x+i)] = str[i];
 		}
 	}
+	void ClearTXT() {
+		screen_txt = "";
+		for (uint32_t i = 0; i < width*height; i++) {
+			screen_txt += " ";
+		}
+	}
 	void Draw() {
 		
 	}
