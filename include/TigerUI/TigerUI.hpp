@@ -19,9 +19,7 @@ public:
 		ioctl(TIOCGWINSZ, 0, ws);
 		height = ws.ws_row;
 		width = ws.ws_col;
-		for (uint32_t i = 0; i < width*height; i++) {
-			screen_txt += " ";
-		}
+		ClearTXT();
 	}
 	void Text(std::string str, uint32_t x, uint32_t y) {
 		for (uint32_t i = 0; i < str.length(); i++) {
