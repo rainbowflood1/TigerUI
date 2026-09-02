@@ -14,6 +14,9 @@ public:
 		height = ws.ws_row;
 		width = ws.ws_col;
 	}
+	void Draw() {
+		
+	}
 };
 
 
