@@ -2,6 +2,8 @@
 #define TIGERUI_HPP_INCLUDED
 
 #include <sys/ioctl.h>
+
+#include <iostream>
 #include <cstdint>
 #include <string>
 #include <vector>
