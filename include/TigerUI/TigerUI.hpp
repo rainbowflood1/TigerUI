@@ -11,7 +11,7 @@
 #include <functional>
 #include <cmath>
 
-#define CLEAR (std::string) "\e[2Jm"
+#define CLEAR (std::string) "\ec"
 
 typedef uint32_t Color;
 
@@ -27,7 +27,7 @@ public:
 	TigerUI() {
 		struct winsize ws;
 		ioctl(0, TIOCGWINSZ, &ws);
-		height = ws.ws_row;
+		height = ws.ws_row-1;
 		width = ws.ws_col;
 		ClearTXT();
 		ClearBGColor();
