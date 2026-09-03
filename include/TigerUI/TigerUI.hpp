@@ -60,7 +60,7 @@ public:
 	void ClearTextColor() {
 		screen_text_color.clear();
 		for (uint32_t i = 0; i < width*height; i++) {
-			screen_text_color.push_back(0x000000FF);
+			screen_text_color.push_back(0xFFFFFFFF);
 		}
 	}
 	void DrawBGBox(float x1, float y1, float x2, float y2, Color color) {
