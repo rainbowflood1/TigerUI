@@ -20,6 +20,7 @@ public:
 	int height;
 	std::string screen_txt = "";
 	std::vector<uint32_t> screen_color;
+	std::vector<uint32_t> screen_text_color;
 	
 	TigerUI() {
 		struct winsize ws;
@@ -28,6 +29,7 @@ public:
 		width = ws.ws_col;
 		ClearTXT();
 		ClearBGColor();
+		ClearTextColor();
 	}
 	void Text(std::string str, float x, float y) {
 		uint32_t str_size = str.length();
@@ -47,6 +49,12 @@ public:
 			screen_color.push_back(0x000000FF);
 		}
 	}
+	void ClearTextColor() {
+		screen_text_color.clear();
+		for (uint32_t i = 0; i < width*height; i++) {
+			screen_text_color.push_back(0x000000FF);
+		}
+	}
 	void DrawBGBox(float x1, float y1, float x2, float y2, Color color) {
 		for (uint32_t x = (int) std::round(x1*width); x < (int) std::round(x2*width); x++) {
 			for (uint32_t y = (int) std::round(y1*height); y < (int) std::round(y2*height); y++) {
@@ -60,10 +68,14 @@ public:
 
 		for (uint32_t y = 0; y < height; y++) {
 			for (uint32_t x = 0; x < width; x++) {
-				uint8_t R = (screen_color[Location(x, y)] >> 24) & 0xFF;
-				uint8_t G = (screen_color[Location(x, y)] >> 16) & 0xFF;
-				uint8_t B = (screen_color[Location(x, y)] >> 8) & 0xFF;
-				screen += (std::format("\e[48;2;{};{};{}m", static_cast<uint32_t>(R), static_cast<uint32_t>(G), static_cast<uint32_t>(B)) + screen_txt[Location(x, y)]);
+				uint8_t BG_R = (screen_color[Location(x, y)] >> 24) & 0xFF;
+				uint8_t BG_G = (screen_color[Location(x, y)] >> 16) & 0xFF;
+				uint8_t BG_B = (screen_color[Location(x, y)] >> 8) & 0xFF;
+
+				uint8_t TXT_R = (screen_text_color[Location(x, y)] >> 24) & 0xFF;
+				uint8_t TXT_G = (screen_text_color[Location(x, y)] >> 16) & 0xFF;
+				uint8_t TXT_B = (screen_text_color[Location(x, y)] >> 8) & 0xFF;
+				screen += (std::format("\e[48;2;{};{};{}m", static_cast<uint32_t>(BG_R), static_cast<uint32_t>(BG_G), static_cast<uint32_t>(BG_B)) + std::format("\e[38;2;{};{};{}m", static_cast<uint32_t>(TXT_R), static_cast<uint32_t>(TXT_G), static_cast<uint32_t>(TXT_B)) + screen_txt[Location(x, y)]);
 			}
 			screen += "\n";
 		}
