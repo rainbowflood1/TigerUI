@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
-#include <format>
+//#include <format>
 #include <cmath>
 
 #define CLEAR (std::string) "\e[2Jm"
@@ -85,7 +85,10 @@ public:
 				uint8_t TXT_R = (screen_text_color[Location(x, y)] >> 24) & 0xFF;
 				uint8_t TXT_G = (screen_text_color[Location(x, y)] >> 16) & 0xFF;
 				uint8_t TXT_B = (screen_text_color[Location(x, y)] >> 8) & 0xFF;
-				screen += (std::format("\e[48;2;{};{};{}m", static_cast<uint32_t>(BG_R), static_cast<uint32_t>(BG_G), static_cast<uint32_t>(BG_B)) + std::format("\e[38;2;{};{};{}m", static_cast<uint32_t>(TXT_R), static_cast<uint32_t>(TXT_G), static_cast<uint32_t>(TXT_B)) + screen_txt[Location(x, y)]);
+				//screen += (std::format("\e[48;2;{};{};{}m", static_cast<uint32_t>(BG_R), static_cast<uint32_t>(BG_G), static_cast<uint32_t>(BG_B)) + std::format("\e[38;2;{};{};{}m", static_cast<uint32_t>(TXT_R), static_cast<uint32_t>(TXT_G), static_cast<uint32_t>(TXT_B)) + screen_txt[Location(x, y)]);
+				
+				
+				screen += (std::string) "\e[48;2;" + std::to_string(static_cast<uint32_t>(BG_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_B)) + (std::string) "m" + (std::string) "\e[38;2;" + std::to_string(static_cast<uint32_t>(TXT_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_B)) + (std::string) "m" + screen_txt[Location(x, y)];
 			}
 			screen += "\n";
 		}
