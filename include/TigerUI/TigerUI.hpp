@@ -43,7 +43,7 @@ public:
 		}
 	}
 	void ClearConsole() {
-		std::cout << "\e[2Jm";
+		std::cout << CLEAR;
 	}
 	void ClearTXT() {
 		screen_txt = "";
