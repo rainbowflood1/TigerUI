@@ -65,6 +65,13 @@ public:
 			}
 		}
 	}
+	void DrawTextColorBox(float x1, float y1, float x2, float y2, Color color) {
+		for (uint32_t x = (int) std::round(x1*width); x < (int) std::round(x2*width); x++) {
+			for (uint32_t y = (int) std::round(y1*height); y < (int) std::round(y2*height); y++) {
+				screen_text_color[Location(x, y)] = color;
+			}
+		}
+	}
 	void Draw() {
 		std::cout << CLEAR;
 		std::string screen = "";
