@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <format>
+#include <cmath>
 
 #define CLEAR (std::string) "\e[2Jm"
 
@@ -28,9 +29,10 @@ public:
 		ClearTXT();
 		ClearBGColor();
 	}
-	void Text(std::string str, uint32_t x, uint32_t y) {
-		for (uint32_t i = 0; i < str.length(); i++) {
-			screen_txt[Location(x, y)+i] = str[i];
+	void Text(std::string str, float x, float y) {
+		uint32_t str_size = str.length();
+		for (uint32_t i = 0; i < str_size; i++) {
+			screen_txt[Location((int) std::round(x*width)+(i - (int)std::round(str_size*0.5)), (int) std::round(y*height))] = str[i];
 		}
 	}
 	void ClearTXT() {
@@ -45,9 +47,9 @@ public:
 			screen_color.push_back(0x000000FF);
 		}
 	}
-	void DrawBGBox(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, Color color) {
-		for (uint32_t x = x1; x < x2; x++) {
-			for (uint32_t y = y1; y < y2; y++) {
+	void DrawBGBox(float x1, float y1, float x2, float y2, Color color) {
+		for (uint32_t x = (int) std::round(x1*width); x < (int) std::round(x2*width); x++) {
+			for (uint32_t y = (int) std::round(y1*height); y < (int) std::round(y2*height); y++) {
 				screen_color[Location(x, y)] = color;
 			}
 		}
