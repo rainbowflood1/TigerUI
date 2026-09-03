@@ -80,9 +80,9 @@ public:
 	void CommandListener(std::function<void(std::string)> commandlistenerfunction) {
 		std::string command = "";
 		while (stop == false) {
-			std::getline(std::cin, command);
 			ClearConsole();
 			commandlistenerfunction(command);
+			std::getline(std::cin, command);
 		}
 	}
 	void Draw() {
