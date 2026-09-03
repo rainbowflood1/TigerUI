@@ -31,6 +31,9 @@ public:
 		ClearBGColor();
 		ClearTextColor();
 	}
+	~TigerUI() {
+		std::cout << "\e[0m";
+	}
 	void Text(std::string str, float x, float y) {
 		uint32_t str_size = str.length();
 		for (uint32_t i = 0; i < str_size; i++) {
