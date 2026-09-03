@@ -11,6 +11,7 @@
 
 #define CLEAR (std::string) "\e[2Jm"
 
+typedef uint32_t Color;
 
 class TigerUI {
 public:
@@ -42,6 +43,13 @@ public:
 		screen_color.clear();
 		for (uint32_t i = 0; i < width*height; i++) {
 			screen_color.push_back(0x000000FF);
+		}
+	}
+	void DrawBGBox(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, Color color) {
+		for (uint32_t x = x1; x < x2; x++) {
+			for (uint32_t y = y1; y < y2; y++) {
+				screen_color[Location(x, y)] = color;
+			}
 		}
 	}
 	void Draw() {
