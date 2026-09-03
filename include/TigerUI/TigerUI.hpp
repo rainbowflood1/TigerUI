@@ -40,6 +40,9 @@ public:
 			screen_txt[Location((int) std::round(x*width)+(i - (int)std::round(str_size*0.5)), (int) std::round(y*height))] = str[i];
 		}
 	}
+	void ClearConsole() {
+		std::cout << "\e[2Jm";
+	}
 	void ClearTXT() {
 		screen_txt = "";
 		for (uint32_t i = 0; i < width*height; i++) {
