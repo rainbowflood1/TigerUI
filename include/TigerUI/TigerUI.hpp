@@ -73,7 +73,7 @@ public:
 		}
 	}
 	void Draw() {
-		std::cout << CLEAR;
+		std::cout << "\e[0m" << CLEAR;
 		std::string screen = "";
 
 		for (uint32_t y = 0; y < height; y++) {
