@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 //#include <format>
+#include <functional>
 #include <cmath>
 
 #define CLEAR (std::string) "\e[2Jm"
@@ -21,6 +22,7 @@ public:
 	std::string screen_txt = "";
 	std::vector<uint32_t> screen_color;
 	std::vector<uint32_t> screen_text_color;
+	bool stop = false;
 	
 	TigerUI() {
 		struct winsize ws;
@@ -75,6 +77,14 @@ public:
 			}
 		}
 	}
+	void CommandListener(std::function<void(std::string)> commandlistenerfunction) {
+		std::string command = "";
+		while (stop == false) {
+			std::getline(std::cin, command);
+			ClearConsole();
+			commandlistenerfunction(command);
+		}
+	}
 	void Draw() {
 		std::cout << "\e[0m" << CLEAR;
 		std::string screen = "";
@@ -95,8 +105,7 @@ public:
 			}
 			screen += "\n";
 		}
-
-		std::cout << screen;
+		std::cout << screen << std::endl << "\e[0m> ";
 	}
 	uint32_t Location(uint16_t x, uint16_t y) {
 		return (y * width) + x;
