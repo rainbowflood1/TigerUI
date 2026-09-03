@@ -48,7 +48,7 @@ public:
 		std::cout << CLEAR;
 		std::string screen = "";
 
-		for (uint32_t y = 0; y < height; y--) {
+		for (uint32_t y = 0; y < height; y++) {
 			for (uint32_t x = 0; x < width; x++) {
 				uint8_t R = (screen_color[Location(x, y)] >> 24) & 0xFF;
 				uint8_t G = (screen_color[Location(x, y)] >> 16) & 0xFF;
