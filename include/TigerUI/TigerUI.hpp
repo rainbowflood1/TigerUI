@@ -52,7 +52,7 @@ public:
 				newlines++;
 				continue;
 			}
-			screen_txt[Location((int) std::round(x*width)+(x_pos - (int)std::round(str_size*0.5)), (int) std::round(y*height)+newlines)] = str[i];
+			screen_txt[Location((int) std::round(x*width)+(x_pos - (int)std::round(str_size*0.5)), (int) std::round(y*height)+newlines)] = string;
 		}
 	}
 	void ClearConsole() {
