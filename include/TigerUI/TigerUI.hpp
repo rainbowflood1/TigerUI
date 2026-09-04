@@ -41,8 +41,13 @@ public:
 		uint16_t x_pos = 0;
 
 		uint32_t str_size = str.length();
+		uint32_t x_character_cell_pos = (int) std::round(x*width);
+		uint32_t y_character_cell_pos = (int) std::round(y*height);
 		for (uint32_t i = 0; i < str_size; i++) {
 			x_pos++;
+
+
+
 			char string = str[i];
 
 			if (string == '\n') {
@@ -52,7 +57,12 @@ public:
 				newlines++;
 				continue;
 			}
-			screen_txt[Location((int) std::round(x*width)+(x_pos - (int)std::round(str_size*0.5)), (int) std::round(y*height)+newlines)] = string;
+			uint32_t x_character_translation = x_character_cell_pos+(x_pos - (int)std::round(str_size*0.5));
+			uint32_t y_character_translation = y_character_cell_pos+newlines;
+			// Ignore replacing a character on screen_txt with a position outside the screen
+			if (x_character_translation < width && x_character_translation > 0 && y_character_translation < height && y_character_cell_pos > 0) {
+				screen_txt[Location(x_character_translation, y_character_translation)] = string;
+			}
 		}
 	}
 	void ClearConsole() {
