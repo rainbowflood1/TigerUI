@@ -118,7 +118,7 @@ public:
 			}
 			screen += "\n";
 		}
-		std::cout << screen << std::endl << "\e[0m> ";
+		std::cout << screen << "\e[0m> ";
 	}
 	uint32_t Location(uint16_t x, uint16_t y) {
 		return (y * width) + x;
