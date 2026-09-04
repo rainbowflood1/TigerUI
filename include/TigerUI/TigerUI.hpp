@@ -9,6 +9,7 @@
 #include <vector>
 //#include <format>
 #include <functional>
+#include <sstream>
 #include <cmath>
 
 #define CLEAR (std::string) "\ec"
@@ -40,29 +41,32 @@ public:
 		uint16_t newlines = 0;
 		uint16_t x_pos = 0;
 
-		uint32_t str_size = str.length();
 		uint32_t x_character_cell_pos = (int) std::round(x*width);
 		uint32_t y_character_cell_pos = (int) std::round(y*height);
-		for (uint32_t i = 0; i < str_size; i++) {
-			x_pos++;
+		std::vector<std::string> text_newlines;
+		std::string text = "";
+		std::stringstream strstreammessage(str);
+		while (std::getline(strstreammessage, text, '\n')) {
+			text_newlines.push_back(text);
+		}
+	
+		for (std::string string_fragments : text_newlines) {
+			uint32_t str_size = string_fragments.length();
+			for (uint32_t i = 0; i < str_size; i++) {
+				x_pos++;
 
+				char string = string_fragments[i];
 
-
-			char string = str[i];
-
-			if (string == '\n') {
-				// The text x axis position starts back to 0 when there is a newline character
-				x_pos = 0;
-				// This value is used to move the text down when there is a newline
-				newlines++;
-				continue;
+				uint32_t x_character_translation = x_character_cell_pos+(x_pos - (int)std::round(str_size*0.5));
+				uint32_t y_character_translation = y_character_cell_pos+newlines;
+				// Ignore replacing a character on screen_txt with a position outside the screen
+				if (x_character_translation < width && x_character_translation > 0 && y_character_translation < height && y_character_cell_pos > 0) {
+					screen_txt[Location(x_character_translation, y_character_translation)] = string;
+				}
 			}
-			uint32_t x_character_translation = x_character_cell_pos+(x_pos - (int)std::round(str_size*0.5));
-			uint32_t y_character_translation = y_character_cell_pos+newlines;
-			// Ignore replacing a character on screen_txt with a position outside the screen
-			if (x_character_translation < width && x_character_translation > 0 && y_character_translation < height && y_character_cell_pos > 0) {
-				screen_txt[Location(x_character_translation, y_character_translation)] = string;
-			}
+			x_pos = 0;
+			// This value is used to move the text down when there is a newline
+			newlines++;
 		}
 	}
 	void ClearConsole() {
