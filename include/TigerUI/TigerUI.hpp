@@ -37,9 +37,22 @@ public:
 		std::cout << "\e[0m";
 	}
 	void Text(std::string str, float x, float y) {
+		uint16_t newlines = 0;
+		uint16_t x_pos = 0;
+
 		uint32_t str_size = str.length();
 		for (uint32_t i = 0; i < str_size; i++) {
-			screen_txt[Location((int) std::round(x*width)+(i - (int)std::round(str_size*0.5)), (int) std::round(y*height))] = str[i];
+			x_pos++;
+			char string = str[i];
+
+			if (string == '\n') {
+				// The text x axis position starts back to 0 when there is a newline character
+				x_pos = 0;
+				// This value is used to move the text down when there is a newline
+				newlines++;
+				continue;
+			}
+			screen_txt[Location((int) std::round(x*width)+(x_pos - (int)std::round(str_size*0.5)), (int) std::round(y*height)+newlines)] = str[i];
 		}
 	}
 	void ClearConsole() {
