@@ -24,6 +24,7 @@ public:
 	std::vector<uint32_t> screen_color;
 	std::vector<uint32_t> screen_text_color;
 	bool stop = false;
+	Color BG = 0x000000FF;
 	
 	TigerUI() {
 		struct winsize ws;
@@ -86,7 +87,7 @@ public:
 	void ClearBGColor() {
 		screen_color.clear();
 		for (uint32_t i = 0; i < width*height; i++) {
-			screen_color.push_back(0x000000FF);
+			screen_color.push_back(BG);
 		}
 	}
 	void ClearTextColor() {
