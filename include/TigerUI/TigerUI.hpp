@@ -37,7 +37,7 @@ public:
 	~TigerUI() {
 		std::cout << "\e[0m";
 	}
-	void Text(std::string str, float x, float y) {
+	void Text(std::string str, float x, float y, bool centered = true) {
 		uint16_t newlines = 0;
 		uint16_t x_pos = 0;
 
@@ -57,8 +57,13 @@ public:
 
 				char string = string_fragments[i];
 
-				uint32_t x_character_translation = x_character_cell_pos+(x_pos - (int)std::round(str_size*0.5));
+				uint32_t x_character_translation = x_character_cell_pos + x_pos;
+				if (centered == true) {
+					x_character_translation -= (int) std::round(str_size*0.5);
+				}
+
 				uint32_t y_character_translation = y_character_cell_pos+newlines;
+
 				// Ignore replacing a character on screen_txt with a position outside the screen
 				if (x_character_translation < width && x_character_translation > 0 && y_character_translation < height && y_character_cell_pos > 0) {
 					screen_txt[Location(x_character_translation, y_character_translation)] = string;
