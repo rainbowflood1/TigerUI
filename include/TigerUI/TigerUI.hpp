@@ -136,8 +136,7 @@ public:
 
 				//screen += (std::format("\e[48;2;{};{};{}m", static_cast<uint32_t>(BG_R), static_cast<uint32_t>(BG_G), static_cast<uint32_t>(BG_B)) + std::format("\e[38;2;{};{};{}m", static_cast<uint32_t>(TXT_R), static_cast<uint32_t>(TXT_G), static_cast<uint32_t>(TXT_B)) + screen_txt[Location(x, y)]);
 				
-				
-				screen += "\e[" + std::to_string(TXT_TYPE) + "m" + (std::string) "\e[48;2;" + std::to_string(static_cast<uint32_t>(BG_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_B)) + (std::string) "m" + (std::string) "\e[38;2;" + std::to_string(static_cast<uint32_t>(TXT_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_B)) + (std::string) "m" + screen_txt[Location(x, y)];
+				screen += "\e[" + std::to_string(TXT_TYPE) + "m" + (std::string) "\e[48;2;" + std::to_string(BG_R) + (std::string) ";" + std::to_string(BG_G) + (std::string) ";" + std::to_string(BG_B) + (std::string) "m" + (std::string) "\e[38;2;" + std::to_string(TXT_R) + (std::string) ";" + std::to_string(TXT_G) + (std::string) ";" + std::to_string(TXT_B) + (std::string) "m" + screen_txt[Location(x, y)];
 			}
 			screen += "\n";
 		}
