@@ -133,7 +133,14 @@ public:
 				uint8_t TXT_B = (screen_text_color[cell_location_index] >> 8) & 0xFF;
 				uint8_t TXT_TYPE = screen_text_color[cell_location_index] & 0xFF;
 
-				screen += "\e[" + std::to_string(TXT_TYPE) + "m" + (std::string) "\e[48;2;" + std::to_string(BG_R) + (std::string) ";" + std::to_string(BG_G) + (std::string) ";" + std::to_string(BG_B) + (std::string) "m" + (std::string) "\e[38;2;" + std::to_string(TXT_R) + (std::string) ";" + std::to_string(TXT_G) + (std::string) ";" + std::to_string(TXT_B) + (std::string) "m" + screen_txt[Location(x, y)];
+				// Change appearance of the text
+				screen += "\e[" + std::to_string(TXT_TYPE) + "m";
+				// Change the background color
+			       	screen += (std::string) "\e[48;2;" + std::to_string(BG_R) + (std::string) ";" + std::to_string(BG_G) + (std::string) ";" + std::to_string(BG_B) + (std::string) "m";
+				// Change the text color
+			        screen += (std::string) "\e[38;2;" + std::to_string(TXT_R) + (std::string) ";" + std::to_string(TXT_G) + (std::string) ";" + std::to_string(TXT_B) + (std::string) "m";
+				// Print out the text
+				screen += screen_txt[Location(x, y)];
 			}
 			screen += "\n";
 		}
