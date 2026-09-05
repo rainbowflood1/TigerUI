@@ -123,14 +123,16 @@ public:
 
 		for (uint32_t y = 0; y < height; y++) {
 			for (uint32_t x = 0; x < width; x++) {
-				uint8_t BG_R = (screen_color[Location(x, y)] >> 24) & 0xFF;
-				uint8_t BG_G = (screen_color[Location(x, y)] >> 16) & 0xFF;
-				uint8_t BG_B = (screen_color[Location(x, y)] >> 8) & 0xFF;
+				uint32_t cell_location_index = Location(x, y);
+				uint8_t BG_R = (screen_color[cell_location_index] >> 24) & 0xFF;
+				uint8_t BG_G = (screen_color[cell_location_index] >> 16) & 0xFF;
+				uint8_t BG_B = (screen_color[cell_location_index] >> 8) & 0xFF;
 
-				uint8_t TXT_R = (screen_text_color[Location(x, y)] >> 24) & 0xFF;
-				uint8_t TXT_G = (screen_text_color[Location(x, y)] >> 16) & 0xFF;
-				uint8_t TXT_B = (screen_text_color[Location(x, y)] >> 8) & 0xFF;
-				uint8_t TXT_TYPE = screen_text_color[Location(x, y)] & 0xFF;
+				uint8_t TXT_R = (screen_text_color[cell_location_index] >> 24) & 0xFF;
+				uint8_t TXT_G = (screen_text_color[cell_location_index] >> 16) & 0xFF;
+				uint8_t TXT_B = (screen_text_color[cell_location_index] >> 8) & 0xFF;
+				uint8_t TXT_TYPE = screen_text_color[cell_location_index] & 0xFF;
+
 				//screen += (std::format("\e[48;2;{};{};{}m", static_cast<uint32_t>(BG_R), static_cast<uint32_t>(BG_G), static_cast<uint32_t>(BG_B)) + std::format("\e[38;2;{};{};{}m", static_cast<uint32_t>(TXT_R), static_cast<uint32_t>(TXT_G), static_cast<uint32_t>(TXT_B)) + screen_txt[Location(x, y)]);
 				
 				
