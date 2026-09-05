@@ -92,7 +92,7 @@ public:
 	void ClearTextColor() {
 		screen_text_color.clear();
 		for (uint32_t i = 0; i < width*height; i++) {
-			screen_text_color.push_back(0xFFFFFFFF);
+			screen_text_color.push_back(0xFFFFFF00);
 		}
 	}
 	void DrawBGBox(float x1, float y1, float x2, float y2, Color color) {
@@ -130,10 +130,11 @@ public:
 				uint8_t TXT_R = (screen_text_color[Location(x, y)] >> 24) & 0xFF;
 				uint8_t TXT_G = (screen_text_color[Location(x, y)] >> 16) & 0xFF;
 				uint8_t TXT_B = (screen_text_color[Location(x, y)] >> 8) & 0xFF;
+				uint8_t TXT_TYPE = screen_text_color[Location(x, y)] & 0xFF;
 				//screen += (std::format("\e[48;2;{};{};{}m", static_cast<uint32_t>(BG_R), static_cast<uint32_t>(BG_G), static_cast<uint32_t>(BG_B)) + std::format("\e[38;2;{};{};{}m", static_cast<uint32_t>(TXT_R), static_cast<uint32_t>(TXT_G), static_cast<uint32_t>(TXT_B)) + screen_txt[Location(x, y)]);
 				
 				
-				screen += (std::string) "\e[48;2;" + std::to_string(static_cast<uint32_t>(BG_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_B)) + (std::string) "m" + (std::string) "\e[38;2;" + std::to_string(static_cast<uint32_t>(TXT_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_B)) + (std::string) "m" + screen_txt[Location(x, y)];
+				screen += "\e[" + std::to_string(TXT_TYPE) + "m" + (std::string) "\e[48;2;" + std::to_string(static_cast<uint32_t>(BG_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(BG_B)) + (std::string) "m" + (std::string) "\e[38;2;" + std::to_string(static_cast<uint32_t>(TXT_R)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_G)) + (std::string) ";" + std::to_string(static_cast<uint32_t>(TXT_B)) + (std::string) "m" + screen_txt[Location(x, y)];
 			}
 			screen += "\n";
 		}
