@@ -140,7 +140,7 @@ public:
 				// Change the text color
 			        screen += (std::string) "\e[38;2;" + std::to_string(TXT_R) + (std::string) ";" + std::to_string(TXT_G) + (std::string) ";" + std::to_string(TXT_B) + (std::string) "m";
 				// Print out the text
-				screen += screen_txt[Location(x, y)];
+				screen += screen_txt[cell_location_index];
 			}
 			screen += "\n";
 		}
